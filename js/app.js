@@ -48,26 +48,12 @@ Enemy.prototype.setSpeed = function(speed){
 //Get the current x position of the enemy
 Enemy.prototype.getX = function(){
   return this.x;
-}
+};
 
 //Get the current y position of the enemy
 Enemy.prototype.getY = function(){
   return this.y;
-}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
+};
 
 // Own player class
 var Player = function() {
@@ -103,17 +89,17 @@ Player.prototype.setY = function(y){
 
 Player.prototype.getX = function(){
   return this.x;
-}
+};
 
 Player.prototype.getY = function(){
   return this.y;
-}
+};
 
 //Handles the input of the player
 //Changes x and y values accordingly to ensure the character remains in the middle
 //of a sqaure
 Player.prototype.handleInput = function(input){
-  if(input =='left' && this.x !=0){
+  if(input =='left' && this.x !==0){
     this.setX(this.x - 100);
   }
   if(input =='right' && this.x < 700){
@@ -167,7 +153,7 @@ var resetEnemies = function(){
   Enemy5.setY(68);
   Enemy5.setSpeed(250);
   allEnemies.push(Enemy5);
-}
+};
 
 
 //The player variable

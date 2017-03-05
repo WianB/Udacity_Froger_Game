@@ -13,9 +13,7 @@ var Engine = (function(global) {
     canvas.height = 606;
     doc.body.appendChild(canvas);
 
-    /* This function serves as the kickoff point for the game loop itself
-     * and handles properly calling the update and render methods.
-     */
+    //Main function
     function main() {
         /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
@@ -43,10 +41,7 @@ var Engine = (function(global) {
         win.requestAnimationFrame(main);
     }
 
-    /* This function does some initial setup that should only occur once,
-     * particularly setting the lastTime variable that is required for the
-     * game loop.
-     */
+    // This function does some initial setup
     function init() {
         reset();
         lastTime = Date.now();
@@ -93,12 +88,12 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/water-block.png', // Top row is water
+                'images/stone-block.png', // Row 1 of 3 of stone
+                'images/stone-block.png', // Row 2 of 3 of stone
+                'images/stone-block.png', // Row 3 of 3 of stone
+                'images/grass-block.png', // Row 1 of 2 of grass
+                'images/grass-block.png' // Row 2 of 2 of grass
             ],
             numRows = 6,
             numCols = 8,
@@ -143,54 +138,51 @@ var Engine = (function(global) {
     //Check collisions for all enemies in a small box around each enemy.
     //This corresponds to a more realistic feel when the player hits the
     //enemy
-    function checkCollisions(){
-      allEnemies.forEach(function(enemy) {
-          var maxX = enemy.getX() + 20;
-          var minX = enemy.getX() - 20;
-          var maxY = enemy.getY() + 10;
-          var minY = enemy.getY() - 10;
-          if( minX < player.getX() && player.getX() < maxX){
-            if( minY < player.getY() && player.getY() < maxY){
-              //If a enemy has been hit the game over reset is called
-              reset("Game over");
+    function checkCollisions() {
+        allEnemies.forEach(function(enemy) {
+            var maxX = enemy.getX() + 20;
+            var minX = enemy.getX() - 20;
+            var maxY = enemy.getY() + 10;
+            var minY = enemy.getY() - 10;
+            if (minX < player.getX() && player.getX() < maxX) {
+                if (minY < player.getY() && player.getY() < maxY) {
+                    //If a enemy has been hit the game over reset is called
+                    reset("Game over");
+                }
             }
-          }
-          //If the player makes it to the last tile the game is won.
-          //The game won reset is called.
-          if(player.getY() == -15){
-            reset("Game won")
-          }
-
-      });
-
-
+            //If the player makes it to the last tile the game is won.
+            //The game won reset is called.
+            if (player.getY() == -15) {
+                reset("Game won");
+            }
+        });
     }
 
     //Resets the game as well as showing the appropriate message when needed.
     function reset(state) {
-      //Resets game after displaying game over message
-        if(state =="Game over"){
-          // noop
-          alert("Game Over");
+        //Resets game after displaying game over message
+        if (state == "Game over") {
+            // noop
+            alert("Game Over");
 
-          resetEnemies();
+            resetEnemies();
 
-          resetPlayer();
+            resetPlayer();
 
-      //Resets the game if the game has been won
-      }else if(state=="Game won"){
-        alert("Game Won");
+            //Resets the game if the game has been won
+        } else if (state == "Game won") {
+            alert("Game Won");
 
-        resetEnemies();
+            resetEnemies();
 
-        resetPlayer();
-      }
-      //Only gets called when the game gets initialized.
-      else{
-        resetEnemies();
+            resetPlayer();
+        }
+        //Only gets called when the game gets initialized.
+        else {
+            resetEnemies();
 
-        resetPlayer();
-      }
+            resetPlayer();
+        }
     }
 
     /* Go ahead and load all of the images we know we're going to need to
